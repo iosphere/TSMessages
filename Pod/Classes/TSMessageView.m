@@ -204,9 +204,17 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
         } else {
             [self.titleLabel setFont:[UIFont boldSystemFontOfSize:fontSize]];
         }
-        [self.titleLabel setShadowColor:[UIColor colorWithHexString:[current valueForKey:@"shadowColor"] alpha:1.0]];
-        [self.titleLabel setShadowOffset:CGSizeMake([[current valueForKey:@"shadowOffsetX"] floatValue],
-                                                    [[current valueForKey:@"shadowOffsetY"] floatValue])];
+        
+        // setup shadow only if offset is
+        CGFloat shadowX = [[current valueForKey:@"shadowOffsetX"] floatValue];
+        CGFloat shadowY = [[current valueForKey:@"shadowOffsetY"] floatValue];
+        if ((shadowX != 0) || (shadowY != 0)) {
+            [self.titleLabel setShadowColor:[UIColor colorWithHexString:[current valueForKey:@"shadowColor"] alpha:1.0]];
+        } else {
+            [self.titleLabel setShadowColor:nil];
+        }
+        [self.titleLabel setShadowOffset:CGSizeMake(shadowX, shadowY)];
+        
         self.titleLabel.numberOfLines = 0;
         self.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
         [self addSubview:self.titleLabel];

@@ -291,7 +291,7 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
             [self.titleLabel setFont:[UIFont boldSystemFontOfSize:fontSize]];
         }
         
-        // setup shadow only if offset is
+        // setup shadow only if offset is not 0
         CGFloat shadowX = [[current valueForKey:@"shadowOffsetX"] floatValue];
         CGFloat shadowY = [[current valueForKey:@"shadowOffsetY"] floatValue];
         if ((shadowX != 0) || (shadowY != 0)) {
